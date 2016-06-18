@@ -14,7 +14,7 @@ It's possible that Git is already installed. To verify this, run:
 
     git --version
 
-If git tells us the version it's installed - we're ready to go! If not - terminal will inform us that it couldn't find the `git` command - Git should be available via your package manager, so try:
+If Git tells us the version it's installed - we're ready to go! If not - terminal will inform us that it couldn't find the `git` command - Git should be available via your package manager, so try:
 
 #### Debian or Ubuntu
 
