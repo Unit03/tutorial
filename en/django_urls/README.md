@@ -8,7 +8,9 @@ A URL is simply a web address. You can see a URL every time you visit a website 
 
 ![Url](images/url.png)
 
-Every page on the Internet needs its own URL. This way your application knows what it should show to a user who opens a URL. In Django we use something called `URLconf` (URL configuration). URLconf is a set of patterns that Django will try to match with the received URL to find the correct view.
+Every page on the Internet needs its own URL and serves two purposes - first one is to tell what server should your browser ask for a page and it's the first part of the URL - usually it's just after `http(s)://` and consists of the domain (or IP address) and optional port number (see `:8000`?) - you've read about that in [How the Internet works] section. :)
+
+Second part - everything after the first one - is more important to us now: it tells the server what page to serve us (you're right - it might be empty :) ). This way your application knows what it should show to a user who opens a URL. In Django we use something called `URLconf` (URL configuration) for that purpose. URLconf is a set of patterns that Django will try to match that _second_ part of the received URL with to find the correct view. From now on, when we  we will refer only to that second part as "URL".
 
 ## How do URLs work in Django?
 
@@ -55,13 +57,14 @@ Anything else in the url definition will be taken literally.
 
 Now imagine you have a website with the address like that: `http://www.mysite.com/post/12345/`, where `12345` is the number of your post.
 
-Writing separate views for all the post numbers would be really annoying. With regular expression we can create a pattern that will match the url and extract the number for us: `^post/(\d+)/$`. Let's break it down piece by piece to see what we are doing here:
+Writing separate views for all the post numbers would be really annoying. With regular expression we can create a pattern that will match the URL and extract the number for us: `^post/(\d+)/$`. Let's break it down piece by piece to see what we are doing here:
 
 * **^post/** is telling Django to take anything that has `post/` at the beginning of the url (right after `^`)
 * **(\d+)** means that there will be a number (one or more digits) and that we want the number captured and extracted
 * **/** tells django that another `/` character should follow
 * **$** then indicates the end of the URL meaning that only strings ending with the `/` will match this pattern
 
+> You surely noticed a little `r` before the `'^admin/'` string - that tells Python this is the "raw string". They work very similarily to normal strings you have already used, but in them, when Python will see a thing called "escape sequence", e.g. new line - `\n` or tab - `\t` - it won't actually interpret it as such, but will treat it as literal slash and `n` or slash and `t` characters. It's useful in a number of places including regular expressions, where we use slashes a lot and in normal strings we would need to "escape" them - prepend with yet another slash! - as well. It would lead to quite a bit of slashes. But fortunately, we can just add this `r` at the beginning. :)
 
 ## Your first Django url!
 
